@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Pathology Labeling Tool</title>
+        <link rel="stylesheet" href="static/css/style.css"/>
+    </head>
+    <body>
+        <!-- header -->
+        <div class="header">
+            <!-- index button -->
+            <div class="index">
+                <button id="index" onclick="window.location.href='http://127.0.0.1:5000'">Pathology Labeling Tool</button>
+            </div>
+
+            <!-- upload & result button -->
+            <div class="header-element">
+                <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data" style="display: inline;">
+                    <label for="file[]" style="padding: 3px 6px; border: 2px solid black; margin:5px; cursor: pointer;">
+                        <p style="display: inline;">select files</p>
+                        <input type="file" multiple="" id="file[]" name="file[]" style="display: none;"/>
+                    </label>
+
+                    <input type="submit" id="upload" value="upload"/>
+                </form>
+
+                <button id="result" onclick="window.location.href='http://127.0.0.1:5000/result'">result</button>
+            </div>
+        </div>
+        
+        <hr style="color: lightgray; margin: 0px 0px 2px 0px;"/>
+
+        <!-- select tissue button -->
+        <div class="select">
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/ADI'">ADI</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/BACK'">BACK</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/DEB'">DEB</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/LYM'">LYM</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/MUC'">MUC</button>
+        </div>
+        <div class="select">
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/MUS'">MUS</button>
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/NORM'">NORM</button>
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/STR'">STR</button>
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/TUM'">TUM</button>
+        </div>
+        
+        <!-- label patches -->
+        <form action="http://127.0.0.1:5000/{{ tissue }}" method="post">
+            <!-- patch block -->
+            <div class="show-patches">
+                <!-- length -->
+                <input type="hidden" name="length" value="{{ datas|length }}"/>
+
+                <!-- id -->
+                {% for data in datas %}
+                    <input type="hidden" name="id{{ loop.index }}" value="{{ data['patch_id'] }}"/>
+                {% endfor %}
+
+                <!-- label -->
+                {% for i in range(datas|length) %}
+                    <input type="hidden" id="label{{ loop.index }}" name="label{{ loop.index }}" value="{{ tissue }}"/>
+                {% endfor %}
+
+                <!-- img -->
+                <div class="patch-block">
+                    {% for data in datas %}
+                    {% if loop.index % 4 == 1 %}
+                        <div>
+                        <img src="{{ data['patch_path'] }}" id="img{{ loop.index }}" onclick="show_buttons(this, 'label{{ loop.index }}')"/>
+                    {% elif loop.index % 4 == 0 or loop.index == datas|length %}
+                        <img src="{{ data['patch_path'] }}" id="img{{ loop.index }}" onclick="show_buttons(this, 'label{{ loop.index }}')"/>
+                        </div>
+                    {% else %}
+                        <img src="{{ data['patch_path'] }}" id="img{{ loop.index }}" onclick="show_buttons(this, 'label{{ loop.index }}')"/>    
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            
+            <!-- confirm -->
+            <div class="confirm">
+                <input type="submit" id="confirm" value="confirm"/>
+            </div>
+        </form>
+
+        <!-- pop -->
+        <div id="pop"></div>
+
+        <!-- import js -->
+        <script src="static/js/script.js"></script>
+
+    </body>
+</html>

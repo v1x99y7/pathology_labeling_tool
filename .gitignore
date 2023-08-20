@@ -1,0 +1,8 @@
+__pycache__/
+static/data/*
+static/result/*
+test_data/
+create_db.py
+db.py
+db.sql
+resnet50_weights.pth

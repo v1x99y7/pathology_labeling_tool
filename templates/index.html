@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Pathology Labeling Tool</title>
+        <link rel="stylesheet" href="static/css/style.css"/>
+    </head>
+    <body>
+        <!-- header -->
+        <div class="header">
+            <!-- index button -->
+            <div class="index">
+                <button id="index" onclick="window.location.href='http://127.0.0.1:5000'">Pathology Labeling Tool</button>
+            </div>
+
+            <!-- upload & result button -->
+            <div class="header-element">
+                <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data" style="display: inline;">
+                    <label for="file[]" style="padding: 3px 6px; border: 2px solid black; margin:5px; cursor: pointer;">
+                        <p style="display: inline;">select files</p>
+                        <input type="file" multiple="" id="file[]" name="file[]" style="display: none;"/>
+                    </label>
+
+                    <input type="submit" id="upload" value="upload"/>
+                </form>
+
+                <button id="result" onclick="window.location.href='http://127.0.0.1:5000/result'">result</button>
+            </div>
+        </div>
+        
+        <hr style="color: lightgray; margin: 0px 0px 2px 0px;"/>
+
+        <!-- select tissue button -->
+        <div class="select">
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/ADI'">ADI</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/BACK'">BACK</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/DEB'">DEB</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/LYM'">LYM</button>
+            <button class="select-tissue-button1" onclick="window.location.href='http://127.0.0.1:5000/MUC'">MUC</button>
+        </div>
+        <div class="select">
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/MUS'">MUS</button>
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/NORM'">NORM</button>
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/STR'">STR</button>
+            <button class="select-tissue-button2" onclick="window.location.href='http://127.0.0.1:5000/TUM'">TUM</button>
+        </div>
+
+        <!-- introduction -->
+
+
+        
+    </body>
+</html>

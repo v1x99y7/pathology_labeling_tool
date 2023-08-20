@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Pathology Labeling Tool</title>
+        <link rel="stylesheet" href="static/css/style.css"/>
+    </head>
+    <body>
+        <!-- header -->
+        <div class="header">
+            <!-- index button -->
+            <div class="index">
+                <button id="index" onclick="window.location.href='http://127.0.0.1:5000'">Pathology Labeling Tool</button>
+            </div>
+
+            <!-- download button -->
+            <div>
+                <form method="get" action="static/result/result.csv">
+                    <input type="submit" id="download" value="download"/>
+                 </form>
+            </div>
+        </div>
+
+        <hr style="color: lightgray; margin: 0px 0px 2px 0px;"/>
+
+        <!-- select condition -->
+        <form action="http://127.0.0.1:5000/result" method="post">
+            <div class="select-condition">
+                <div id="select-condition">
+                    <select name="verification">
+                        <option value="%">verification</option>
+                        <option value="verified">verified</option>
+                        <option value="unverified">unverified</option>
+                    </select>
+                    
+                    <select name="true_label">
+                        <option value="%">true_label</option>
+                        <option value="ADI">ADI</option>
+                        <option value="BACK">BACK</option>
+                        <option value="DEB">DEB</option>
+                        <option value="LYM">LYM</option>
+                        <option value="MUC">MUC</option>
+                        <option value="MUS">MUS</option>
+                        <option value="NORM">NORM</option>
+                        <option value="STR">STR</option>
+                        <option value="TUM">TUM</option>
+                    </select>
+        
+                    <select name="pred_label">
+                        <option value="%">pred_label</option>
+                        <option value="ADI">ADI</option>
+                        <option value="BACK">BACK</option>
+                        <option value="DEB">DEB</option>
+                        <option value="LYM">LYM</option>
+                        <option value="MUC">MUC</option>
+                        <option value="MUS">MUS</option>
+                        <option value="NORM">NORM</option>
+                        <option value="STR">STR</option>
+                        <option value="TUM">TUM</option>
+                    </select>
+        
+                    <input type="submit" value="Search"/>
+                </div>
+            </div>
+        </form>
+        
+        <!-- result table --> <!-- pages --> <!-- sort by times -->
+        <div class="result-table">
+            <table id="result-table" border="1px solid black">
+                <caption style="font-size: 35px;">Labeling Result</caption>
+    
+                <tr style="font-weight: bold;">
+                    <th>patch_id</th>
+                    <th>filename</th>
+                    <th>verification</th>
+                    <th>true_label</th>
+                    <th>pred_label</th>
+                </tr>
+    
+                {% for data in datas %}
+                    <tr>
+                        <td>{{ data['patch_id'] }}</td>
+                        <td><a href="{{ data['patch_path'] }}">{{ data['filename'] }}</a></td>
+                        <td>{{ data['verification'] }}</td>
+                        <td>{{ data['true_label'] }}</td>
+                        <td>{{ data['pred_label'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </body>
+</html>

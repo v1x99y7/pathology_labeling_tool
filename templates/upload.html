@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Pathology Labeling Tool</title>
+        <link rel="stylesheet" href="static/css/style.css"/>
+    </head>
+    <body>
+        <!-- header -->
+        <div class="header">
+            <!-- index button -->
+            <div class="index">
+                <button id="index" onclick="window.location.href='http://127.0.0.1:5000'">Pathology Labeling Tool</button>
+            </div>
+
+            <!-- upload & result button -->
+            <div class="header-element">
+                <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data" style="display: inline;">
+                    <label for="file[]" style="padding: 3px 6px; border: 2px solid black; margin:5px; cursor: pointer;">
+                        <p style="display: inline;">select files</p>
+                        <input type="file" multiple="" id="file[]" name="file[]" style="display: none;"/>
+                    </label>
+
+                    <input type="submit" id="upload" value="upload"/>
+                </form>
+
+                <button id="result" onclick="window.location.href='http://127.0.0.1:5000/result'">result</button>
+            </div>
+        </div>
+
+        <hr style="color: lightgray; margin: 0px 0px 2px 0px;"/>
+
+        <!-- upload result -->
+        <div id="upload-result">
+            <div>
+                <p><b style="font-size: 30px;">Upload success</b></p>
+                <p>A total of {{ file_number }} files were uploaded, and the classification results are shown below.</p>
+                {% for tissue in result %}
+                    <div>
+                        <p><b>{{ tissue }}: {{ result[tissue]|length }} files</b></p>
+                        {% for path in result[tissue] %}
+                            <img src="{{ path }}" style="width: 50px; height: 50px;"/>
+                            {% if loop.index % 10 == 0 or loop.index == result[tissue]|length %}
+                                <br/>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </body>
+</html>
