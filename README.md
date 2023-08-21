@@ -26,7 +26,7 @@ This project aims to assist pathologists to label pathological images in a more 
 * Click the confirm button to update the label.
 <img src="https://github.com/v1x99y7/pathology_labeling_tool/blob/main/figures/labeling3.png" width = "500px"/>
 
-### View and download labeled results.
+### 3. View and download labeled results.
 #### Select data from the database.
 * Click the result button on the homepage, and used the drop-down list to search the data for the selected condition.
 <img src="https://github.com/v1x99y7/pathology_labeling_tool/blob/main/figures/result1.png" width = "500px"/>
